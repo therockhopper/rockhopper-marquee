@@ -1,13 +1,14 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: {
-    component: './src/index.js'
-  },
+  mode: 'development',
+  entry: './src/javascript/index.js',
   output: {
-    filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
@@ -16,7 +17,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',
@@ -24,20 +25,57 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
-      }, {
-        test: /\.html$/,
-        exclude: /(node_modules)/,
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          'html-loader'
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass")
+            }
+          }
         ]
-      }, {
-        test: /\.s?css$/,
-        exclude: /(node_modules)/,
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
         use: [
-          'to-string-loader',
-          'css-loader',
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: 'images'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|ttf|otf|eot)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: 'fonts'
+            }
+          }
         ]
       }
     ]
   },
-}
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "bundle.css"
+    })
+  ]
+};
+
+
