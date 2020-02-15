@@ -1,11 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'FatFrank';
+  src: url('../fonts/FatFrank.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'FatFrank';
   height:100%;
 }
 
