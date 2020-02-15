@@ -1,19 +1,33 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+$primary: #e84545;
+
 @font-face {
-  font-family: 'FatFrank';
-  src: url('../fonts/FatFrank.otf');
+  font-family: "FatFrank";
+  src: url("../fonts/FatFrank.otf");
   font-weight: normal;
   font-style: normal;
 }
 
 html {
-  font-family: 'FatFrank';
-  height:100%;
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
 }
 
 body {
   height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "FatFrank";
+  color: $primary;
 }
